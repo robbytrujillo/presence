@@ -43,7 +43,7 @@ require_once('../../config.php');
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href=".">
-              <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <img src="<?= base_url('assets/img/logo-small.svg') ?>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -152,12 +152,9 @@ require_once('../../config.php');
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Status</a>
-                <a href="./profile.html" class="dropdown-item">Profile</a>
-                <a href="#" class="dropdown-item">Feedback</a>
-                <div class="dropdown-divider"></div>
-                <a href="./settings.html" class="dropdown-item">Settings</a>
-                <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                <a href="#" class="dropdown-item">Profile</a>
+                <a href="./profile.html" class="dropdown-item">Password Editing</a>
+                <a href="#" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>
