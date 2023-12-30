@@ -41,7 +41,7 @@ require_once('../config.php');
           <div class="col-lg">
             <div class="container-tight">
               <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36" alt=""></a>
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url('assets/img/logo-small.svg') ?>" height="36" alt=""></a>
               </div>
               <div class="card card-md">
                 <div class="card-body">
