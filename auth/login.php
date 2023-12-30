@@ -48,8 +48,8 @@ require_once('../config.php');
                   <h2 class="h2 text-center mb-4">Login to your account</h2>
                   <form action="./" method="get" autocomplete="off" novalidate>
                     <div class="mb-3">
-                      <label class="form-label">Email address</label>
-                      <input type="email" class="form-control" placeholder="your@email.com" autocomplete="off">
+                      <label class="form-label">Username</label>
+                      <input type="username" class="form-control" placeholder="username" autocomplete="off">
                     </div>
                     <div class="mb-2">
                       <label class="form-label">
