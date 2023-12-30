@@ -94,5 +94,13 @@ require_once('../config.php');
     <!-- Tabler Core -->
     <script src="<?= base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?= base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
-  </body>
+    
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Sweet Alert Check -->
+    <script>
+        Swal.fire("SweetAlert2 is working!");
+    </script>
+</body>
 </html>
