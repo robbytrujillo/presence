@@ -11,7 +11,33 @@ if (isset($_POST['login'])) {
   $result = mysqli_query($connect, "SELECT * FROM users JOIN employee ON users.employee_id = employee.id WHERE username = '$username'");
 
   if (mysqli_num_rows($result) === 1) {
+    $row = mysqli_fetch_assoc($result);
 
+    if (password_verify($password, $row["password"])) {
+      if ($row['status'] == 'active') {
+
+          $_SESSION["login"] = true;
+          $_SESSION["id"] = $row["id"];
+          $_SESSION["role"] = $row["role"];
+          $_SESSION["name"] = $row["name"];
+          $_SESSION["employee_id_number"] = $row["employee_id_number"];
+          $_SESSION["position"] = $row["position"];
+          $_SESSION["presence_location"] = $row["presence_location"];
+
+          if ($row['role'] === 'admin') {
+            header("Location: ../admin/home/home.php");
+            exit();
+          } else {
+            header("Location: ../employee/home/home.php");
+            exit();
+          }
+
+      } else {
+        $_SESSION["fail"] = "Your account is not active yet";
+      }
+    } else {
+      $_SESSION["fail"] = "Incorrect password, please try again";
+    }
   } else {
     $_SESSION["fail"] = "Incorrect username, please try again";
   }
@@ -58,6 +84,18 @@ if (isset($_POST['login'])) {
               <div class="text-center mb-4">
                 <a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url('assets/img/pres-remove.png') ?>" height="36" alt=""></a>
               </div>
+
+              <?php 
+
+              if (isset($_GET['message'])) {
+                 if ($_GET['message'] == 'not_login_yet') {
+                      $_SESSION['fail'] = 'You are not login yet';
+                 } else if ($_GET['message'] == 'deny_access') {
+                      $_SESSION['fail'] = 'Access to this page is denied';
+                 }
+              }
+
+              ?>
 
               <!-- <?= password_hash('123', PASSWORD_DEFAULT); ?> -->
 
@@ -117,6 +155,7 @@ if (isset($_POST['login'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Sweet Alert Check -->
+    <?php if ($_SESSION['fail']) {?>
     <script>
       Swal.fire({
           icon: "error",
@@ -124,6 +163,10 @@ if (isset($_POST['login'])) {
           text: "<?= $_SESSION['fail'] ?>",
       });
     </script>
+
+    <?php unset($_SESSION['fail']); ?>
+
+    <?php } ?>
     
     <!-- <script>
         Swal.fire("SweetAlert2 is working!");

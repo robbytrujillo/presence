@@ -1,5 +1,17 @@
 
-<?php include('../layout/header.php') ?>
+<?php 
+
+session_start();
+
+if (!isset($_SESSION['login'])) {
+  header('Location: ../../auth/login.php?message=not_login_yet');
+} else  if ($_SESSION['role'] != 'employee') {
+  header('Location: ../../auth/login.php?message=deny_access');
+}
+
+include('../layout/header.php') 
+
+?>
 
 <!-- Page body -->
 <div class="page-body">
