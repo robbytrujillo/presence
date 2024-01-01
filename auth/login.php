@@ -1,6 +1,21 @@
 <?php
 
+session_start();
+
 require_once('../config.php');
+
+if (isset($_POST['login'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  $result = mysqli_query($connect, "SELECT * FROM users JOIN employee ON users.employee_id = employee.id WHERE username = '$username'");
+
+  if (mysqli_num_rows($result) === 1) {
+
+  } else {
+    $_SESSION["fail"] = "Incorrect username, please try again";
+  }
+}
 
 ?>
 
@@ -41,15 +56,18 @@ require_once('../config.php');
           <div class="col-lg">
             <div class="container-tight">
               <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url('assets/img/logo-small.svg') ?>" height="36" alt=""></a>
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="<?= base_url('assets/img/pres-remove.png') ?>" height="36" alt=""></a>
               </div>
+
+              <!-- <?= password_hash('123', PASSWORD_DEFAULT); ?> -->
+
               <div class="card card-md">
                 <div class="card-body">
                   <h2 class="h2 text-center mb-4">Login to your account</h2>
-                  <form action="./" method="get" autocomplete="off" novalidate>
+                  <form action="" method="post" autocomplete="off" novalidate>
                     <div class="mb-3">
                       <label class="form-label">Username</label>
-                      <input type="username" autofocus class="form-control" placeholder="Your username" autocomplete="off">
+                      <input type="text" autofocus class="form-control" name="username" placeholder="Your username" autocomplete="off">
                     </div>
                     <div class="mb-2">
                       <label class="form-label">
@@ -59,7 +77,7 @@ require_once('../config.php');
                         </span> -->
                       </label>
                       <div class="input-group input-group-flat">
-                        <input type="password" class="form-control"  placeholder="Your password"  autocomplete="off">
+                        <input type="password" class="form-control" name="password" placeholder="Your password"  autocomplete="off">
                         <span class="input-group-text">
                           <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
@@ -74,7 +92,7 @@ require_once('../config.php');
                       </label>
                     </div> -->
                     <div class="form-footer">
-                      <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                      <button type="submit" name="login" class="btn btn-primary w-100">Sign in</button>
                     </div>
                   </form>
                 </div>
@@ -82,7 +100,7 @@ require_once('../config.php');
             </div>
           </div>
           <div class="col-lg d-none d-lg-block">
-            <img src="<?= base_url('assets/img/undraw_secure_login_pdn4.svg') ?>" height="300" class="d-block mx-auto" alt="">
+            <img src="<?= base_url('assets/img/undraw_access_account_re_8spm.svg') ?>" height="300" class="d-block mx-auto" alt="">
           </div>
         </div>
       </div>
@@ -100,7 +118,16 @@ require_once('../config.php');
 
     <!-- Sweet Alert Check -->
     <script>
-        Swal.fire("SweetAlert2 is working!");
+      Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "<?= $_SESSION['fail'] ?>",
+      });
     </script>
+    
+    <!-- <script>
+        Swal.fire("SweetAlert2 is working!");
+    </script> -->
+
 </body>
 </html>
