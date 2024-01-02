@@ -8,7 +8,9 @@ if (!isset($_SESSION['login'])) {
   header('Location: ../../auth/login.php?message=deny_access');
 }
 
-include ('../layout/header.php')
+$title = "Home";
+
+include ('../layout/header.php');
 ?>
 
 <!-- Page body -->

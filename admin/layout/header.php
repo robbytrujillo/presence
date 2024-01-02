@@ -1,5 +1,7 @@
 <?php
 
+global $title;
+
 require_once('../../config.php');
 
 ?>
@@ -265,7 +267,7 @@ require_once('../../config.php');
               <div class="col">
                 <!-- Page pre-title -->
                 <h2 class="page-title">
-                  Dashboard
+                  <?= $title ?>
                 </h2>
               </div>
               <!-- Page title actions -->
