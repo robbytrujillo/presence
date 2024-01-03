@@ -22,7 +22,10 @@ $result = mysqli_query($connect, "SELECT * FROM position ORDER BY id DESC");
 <!-- Page body -->
 <div class="page-body">
   <div class="container-xl">
-    <div class="row row-deck row-cards">
+
+  <a href="<?= base_url('admin/data_positions/addPositions.php') ?>" class="btn btn-primary">Add Data</a>
+
+    <div class="row row-deck row-cards mt-3">
 
     <table class="table table-bordered">
       <tr class="text-center">
@@ -33,21 +36,19 @@ $result = mysqli_query($connect, "SELECT * FROM position ORDER BY id DESC");
 
       <?php if(mysqli_num_rows($result) === 0) : ?>
         <tr>
-          <td>The data is still empty, please add new data</td>
+          <td colspan="3">The data is still empty, please add new data</td>
         </tr>  
       <?php else : ?>
-
-
-      <?php $no=1; while($positions = mysqli_fetch_array($result)): ?>
-        <tr>
-          <td><?= $no++ ?></td>
-          <td><?= $positions['positions'] ?></td>
-          <td class="text-center">
-            <a href="<?= base_url('admin/data_positions/editPositions.php?id=' .$positions['id']) ?>" class="badge bg-primary badge-pill">Edit
-            
-            <a href="<?= base_url('admin/data_positions/deletePositions.php?id=' .$positions['id']) ?>" class="badge bg-danger badge-pill">Delete
-          </td>
-        </tr>
+        <?php $no=1; while($positions = mysqli_fetch_array($result)): ?>
+          <tr>
+            <td><?= $no++ ?></td>
+            <td><?= $positions['positions'] ?></td>
+            <td class="text-center">
+              <a href="<?= base_url('admin/data_positions/editPositions.php?id=' .$positions['id']) ?>" class="badge bg-primary badge-pill">Edit
+              
+              <a href="<?= base_url('admin/data_positions/deletePositions.php?id=' .$positions['id']) ?>" class="badge bg-danger badge-pill">Delete
+            </td>
+          </tr>
         <?php endwhile; ?>
 
         <?php endif; ?>
