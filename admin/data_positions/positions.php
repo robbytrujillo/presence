@@ -23,9 +23,9 @@ $result = mysqli_query($connect, "SELECT * FROM position ORDER BY id DESC");
 <div class="page-body">
   <div class="container-xl">
 
-  <a href="<?= base_url('admin/data_positions/addPositions.php') ?>" class="btn btn-primary">Add Data</a>
+  <a href="<?= base_url('admin/data_positions/addPositions.php') ?>" class="btn btn-primary"><span class="text"><i class="fa-solid fa-circle-plus"></i> Add Data</span></a>
 
-    <div class="row row-deck row-cards mt-3">
+    <div class="row row-deck row-cards mt-1">
 
     <table class="table table-bordered">
       <tr class="text-center">
