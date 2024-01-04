@@ -46,7 +46,7 @@ $result = mysqli_query($connect, "SELECT * FROM position ORDER BY id DESC");
             <td class="text-center">
               <a href="<?= base_url('admin/data_positions/editPositions.php?id=' .$positions['id']) ?>" class="badge bg-primary badge-pill">Edit
               
-              <a href="<?= base_url('admin/data_positions/deletePositions.php?id=' .$positions['id']) ?>" class="badge bg-danger badge-pill">Delete
+              <a href="<?= base_url('admin/data_positions/deletePositions.php?id=' .$positions['id']) ?>" class="badge bg-danger badge-pill button-deleted">Delete
             </td>
           </tr>
         <?php endwhile; ?>

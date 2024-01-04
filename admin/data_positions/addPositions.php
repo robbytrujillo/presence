@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
       // query
       $result = mysqli_query($connect, "INSERT INTO `position` (`positions`) VALUES ('$positions')");
 
-      $_SESSION['succeed'] = "Data positions saved successfully";
+      $_SESSION['succeed'] = "Data saved successfully";
       // redirect
       header("Location: positions.php");
       exit;

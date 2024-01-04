@@ -19,13 +19,11 @@
                 <ul class="list-inline list-inline-dots mb-0">
                   <li class="list-inline-item">
                     Copyright &copy; 2023
-                    <a href="." class="link-secondary">Tabler</a>.
+                    <a href="." class="link-secondary">IT Development</a>.
                     All rights reserved.
                   </li>
                   <li class="list-inline-item">
-                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                      v1.0.0-beta19
-                    </a>
+                    
                   </li>
                 </ul>
               </div>
@@ -141,6 +139,8 @@
     <script src="<?= base_url('assets/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062') ?>" defer></script>
     <script src="<?= base_url('assets/libs/jsvectormap/dist/maps/world.js?1684106062') ?>" defer></script>
     <script src="<?= base_url('assets/libs/jsvectormap/dist/maps/world-merc.js?1684106062') ?>" defer></script>
+    <!-- J-QUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Tabler Core -->
     <script src="<?= base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?= base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
@@ -149,7 +149,7 @@
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
      <!-- Alert Validation (Mixin Example) -->
-     <?php if ($_SESSION['validation']) : ?>
+     <?php if (isset($_SESSION['validation'])) : ?>
         <script>
             const Toast = Swal.mixin({
             toast: true,
@@ -171,7 +171,50 @@
         <?php unset($_SESSION['validation']); ?>
 
         <?php endif; ?>
-      
 
+        <!-- Alert Succeed (Mixin Example) -->
+        <?php if (isset($_SESSION['succeed'])) : ?>
+        <script>
+            const Succeed = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+            });
+            Succeed.fire({
+              icon: "success",
+              title: "<?= $_SESSION['succeed'] ?>"
+            });
+        </script>
+
+        <?php unset($_SESSION['succeed']); ?>
+
+        <?php endif; ?>
+      
+        <!-- Alert deleted confirmation -->
+        <script>
+            $('.button-deleted').on('click', function() {
+              var getLink = $(this).attr('href');
+              Swal.fire({
+              title: "Sure it will be deleted?",
+              text: "Data that has been deleted cannot be restored!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, delete it!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = getLink
+                }
+              });
+              return false
+            });
+        </script>
   </body>
 </html>
