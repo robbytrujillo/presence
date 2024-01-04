@@ -145,5 +145,33 @@
     <script src="<?= base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?= base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
     
+     <!-- Sweet Alert -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- Alert Validation (Mixin Example) -->
+     <?php if ($_SESSION['validation']) : ?>
+        <script>
+            const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+            });
+            Toast.fire({
+              icon: "error",
+              title: "<?= $_SESSION['validation'] ?>"
+            });
+        </script>
+
+        <?php unset($_SESSION['validation']); ?>
+
+        <?php endif; ?>
+      
+
   </body>
 </html>
