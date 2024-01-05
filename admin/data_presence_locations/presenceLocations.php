@@ -47,11 +47,11 @@ $result = mysqli_query($connect, "SELECT * FROM presence_location ORDER BY id DE
             <td><?= $location['latitude'] . '/' . $location['longitude'] ?></td>
             <td><?= $location['radius'] ?></td>
             <td class="text-center">
-              <a href="<?= base_url('admin/data_presence_locations/detailPresenceLocation.php/' . $location['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
+              <a href="<?= base_url('admin/data_presence_locations/detailPresenceLocation.php?id=' . $location['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
               
-              <a href="<?= base_url('admin/data_presence_locations/editPresenceLocation.php/' . $location['id']) ?>" class="badge badge-pill bg-primary">Edit</a>
+              <a href="<?= base_url('admin/data_presence_locations/editPresenceLocation.php?id=' . $location['id']) ?>" class="badge badge-pill bg-primary">Edit</a>
               
-              <a href="<?= base_url('admin/data_presence_locations/deletePresenceLocation.php/' . $location['id']) ?>" class="badge badge-pill bg-danger">Delete</a>
+              <a href="<?= base_url('admin/data_presence_locations/deletePresenceLocation.php?id=' . $location['id']) ?>" class="badge badge-pill bg-danger button-deleted">Delete</a>
             </td>
           </tr>
         <?php endwhile; ?>  

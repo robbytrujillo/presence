@@ -110,7 +110,7 @@ if (isset($_POST['save'])) {
 
             <div class="mb-3">
               <label for="">Radius</label>
-              <input type="number" class="form-control" name="radius" value="<?php if (isset($_POST['address_location'])) echo $_POST['address_location'] ?>">
+              <input type="number" class="form-control" name="radius" value="<?php if (isset($_POST['radius'])) echo $_POST['radius'] ?>">
             </div>
             
             <div class="mb-3">
