@@ -81,56 +81,56 @@ if (isset($_POST['save'])) {
         <form action="<?= base_url('admin/data_presence_locations/addPresenceLocations.php') ?>" method="POST">
             <div class="mb-3">
               <label for="">Name Location</label>
-              <input type="text" class="form-control" name="name_location">
+              <input type="text" class="form-control" name="name_location" value="<?php if (isset($_POST['name_location'])) echo $_POST['name_location'] ?>">
             </div>
 
             <div class="mb-3">
               <label for="">Address Location</label>
-              <input type="text" class="form-control" name="address_location">
+              <input type="text" class="form-control" name="address_location" value="<?php if (isset($_POST['address_location'])) echo $_POST['address_location'] ?>">
             </div>
 
             <div class="mb-3">
               <label for="">Type Location</label>
               <select class="form-control" name="type_location">
                 <option value="">--Choose Type Location--</option>
-                <option value="Center">Center</option>
-                <option value="Branch">Branch</option>
+                <option <?php if (isset($_POST['type_location']) && $_POST['type_location'] == 'Center') { echo 'selected'; } ?> value="Center">Center</option>
+                <option <?php if (isset($_POST['type_location']) && $_POST['type_location'] == 'Branch') { echo 'selected'; } ?> value="Branch">Branch</option>
               </select> 
             </div>
 
             <div class="mb-3">
               <label for="">Latitude</label>
-              <input type="text" class="form-control" name="latitude">
+              <input type="text" class="form-control" name="latitude" value="<?php if (isset($_POST['latitude'])) echo $_POST['latitude'] ?>">
             </div>
 
             <div class="mb-3">
               <label for="">Longitude</label>
-              <input type="text" class="form-control" name="longitude">
+              <input type="text" class="form-control" name="longitude" value="<?php if (isset($_POST['longitude'])) echo $_POST['longitude'] ?>">
             </div>
 
             <div class="mb-3">
               <label for="">Radius</label>
-              <input type="number" class="form-control" name="radius">
+              <input type="number" class="form-control" name="radius" value="<?php if (isset($_POST['address_location'])) echo $_POST['address_location'] ?>">
             </div>
             
             <div class="mb-3">
               <label for="">Time Zone</label>
               <select class="form-control" name="time_zone">
                 <option value="">--Choose Type Location--</option>
-                <option value="WIB">WIB</option>
-                <option value="WITA">WITA</option>
-                <option value="WIT">WIT</option>
+                <option <?php if (isset($_POST['time_zone']) && $_POST['time_zone'] == 'WIB') { echo 'selected'; } ?> value="WIB">WIB</option>
+                <option <?php if (isset($_POST['time_zone']) && $_POST['time_zone'] == 'WITA') { echo 'selected'; } ?> value="WITA">WITA</option>
+                <option <?php if (isset($_POST['time_zone']) && $_POST['time_zone'] == 'WIT') { echo 'selected'; } ?> value="WIT">WIT</option>
               </select> 
             </div>
 
             <div class="mb-3">
               <label for="">Entry Time</label>
-              <input type="time" class="form-control" name="entry_time">
+              <input type="time" class="form-control" name="entry_time" value="<?php if (isset($_POST['entry_time'])) echo $_POST['entry_time'] ?>">
             </div>
             
             <div class="mb-3">
               <label for="">Out Time</label>
-              <input type="time" class="form-control" name="out_time">
+              <input type="time" class="form-control" name="out_time" value="<?php if (isset($_POST['out_time'])) echo $_POST['out_time'] ?>">
             </div>
 
             <button type="submit" class="btn btn-primary" name="save">Save</button>
