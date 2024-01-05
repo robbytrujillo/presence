@@ -77,7 +77,7 @@ $result = mysqli_query($connect, "SELECT * FROM presence_location WHERE id=$id")
                 </table>
             </div>
         </div>
-        <a href="<?= base_url('admin/data_presence_locations/presenceLocations.php') ?>" type="submit" class="btn btn-primary">Back</a>
+        <a href="<?= base_url('admin/data_presence_locations/presenceLocations.php') ?>" type="submit" class="btn btn-primary mt-2">Back</a>
     </div>
      
   
