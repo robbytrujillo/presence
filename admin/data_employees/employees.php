@@ -50,11 +50,11 @@ $result = mysqli_query($connect, "SELECT users.employee_id, users.username,
             <td><?= $employees['position'] ?></td>
             <td><?= $employees['role'] ?></td>
             <td class="text-center">
-              <a href="<?= base_url('admin/data_employees/detailEmployees.php?id=' . $location['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
+              <a href="<?= base_url('admin/data_employees/detailEmployees.php?id=' . $employees['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
               
-              <a href="<?= base_url('admin/data_employees/editEmployees.php?id=' . $location['id']) ?>" class="badge badge-pill bg-primary">Edit</a>
+              <a href="<?= base_url('admin/data_employees/editEmployees.php?id=' . $employees['id']) ?>" class="badge badge-pill bg-primary">Edit</a>
               
-              <a href="<?= base_url('admin/data_employees/deleteEmployees.php?id=' . $location['id']) ?>" class="badge badge-pill bg-danger button-deleted">Delete</a>
+              <a href="<?= base_url('admin/data_employees/deleteEmployees.php?id=' . $employees['id']) ?>" class="badge badge-pill bg-danger button-deleted">Delete</a>
             </td>
           </tr>
         <?php endwhile; ?>  
