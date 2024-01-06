@@ -30,18 +30,15 @@ $result = mysqli_query($connect, "SELECT users.employee_id, users.username,
       <th>No</th>
       <th>Employee ID Number</th>
       <th>Name</th>
-      <th>Gender</th>
-      <th>Address</th>
-      <th>Handphone</th>
+      <th>Username</th>
       <th>Position</th>
-      <th>Presence Location</th>
-      <th>Photo</th>
+      <th>Role</th>
       <th>Action</th>
     </tr>
 
     <?php if(mysqli_num_rows($result) === 0) { ?>
       <tr>
-        <td colspan="6">Empty data, please add new data!</td>
+        <td colspan="7">Empty data, please add new data!</td>
       </tr>
       <?php }else{ ?>
         <?php $no=1; while($employees = mysqli_fetch_array($result)) : ?>
@@ -49,12 +46,9 @@ $result = mysqli_query($connect, "SELECT users.employee_id, users.username,
             <td><?= $no++ ?></td>
             <td><?= $employees['employee_id_number'] ?></td>
             <td><?= $employees['name'] ?></td>
-            <td><?= $employees['gender'] ?></td>
-            <td><?= $employees['address'] ?></td>
-            <td><?= $employees['handphone'] ?></td>
+            <td><?= $employees['username'] ?></td>
             <td><?= $employees['position'] ?></td>
-            <td><?= $employees['presence_location'] ?></td>
-            <td><?= $employees['photo'] ?></td>
+            <td><?= $employees['role'] ?></td>
             <td class="text-center">
               <a href="<?= base_url('admin/data_employees/detailEmployees.php?id=' . $location['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
               
