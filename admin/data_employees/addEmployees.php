@@ -16,55 +16,77 @@ include ('../layout/header.php');
 require_once('../../config.php');
 
 if (isset($_POST['save'])) {
-  $name_location = htmlspecialchars($_POST['name_location']);
-  $address_location = htmlspecialchars($_POST['address_location']);
-  $type_location = htmlspecialchars($_POST['type_location']);
-  $latitude = htmlspecialchars($_POST['latitude']);
-  $longitude = htmlspecialchars($_POST['longitude']);
-  $radius = htmlspecialchars($_POST['radius']);
-  $time_zone = htmlspecialchars($_POST['time_zone']);
-  $entry_time = htmlspecialchars($_POST['entry_time']);
-  $out_time = htmlspecialchars($_POST['out_time']);
+  $employee_id_number = htmlspecialchars($_POST['employee_id_number']);
+  $name = htmlspecialchars($_POST['name']);
+  $gender = htmlspecialchars($_POST['gender']);
+  $address = htmlspecialchars($_POST['address']);
+  $handphone = htmlspecialchars($_POST['handphone']);
+  $position = htmlspecialchars($_POST['position']);
+  $username = htmlspecialchars($_POST['username']);
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $role = htmlspecialchars($_POST['role']);
+  $status = htmlspecialchars($_POST['status']);
+  $presence_location = htmlspecialchars($_POST['presence_location']);
+
+  if (isset($_FILE['photo'])) {
+    $file = $_FILE['photo'];
+    $name_file = $file['name'];
+    $file_tmp = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_directory = "../../assets/img/photo_employee/" .$name_file;
+    
+    $take_extention = pathinfo($name_file, PATHINFO_EXTENSION);
+    $extention_permitted = ["jpg","png","jpeg"];
+    $max_file_size = 10 * 1024 * 1024;
+
+    move_uploaded_file($file_tmp, $file_directory);
+
+  }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($name_location)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Name loc.n is mandatory!";
+    if (empty($name)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Name  is mandatory!";
     }
-    if (empty($address_location)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Address loc. is mandatory!";
+    if (empty($gender)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Gender is mandatory!";
     }
-    if (empty($type_location)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Type loc. is mandatory!";
-    }
-    if (empty($latitude)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Latitude is mandatory!";
-    }
-    if (empty($longitude)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Longitude is mandatory!";
-    }
-    if (empty($radius)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Radius is mandatory!";
-    }
-    if (empty($time_zone)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Time Zone is mandatory!";
-    }
-    if (empty($entry_time)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Entry Time is mandatory!";
-    }
-    if (empty($out_time)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Out Time is mandatory!";
-    }
+    // if (empty($type_location)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Type loc. is mandatory!";
+    // }
+    // if (empty($latitude)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Latitude is mandatory!";
+    // }
+    // if (empty($longitude)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Longitude is mandatory!";
+    // }
+    // if (empty($radius)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Radius is mandatory!";
+    // }
+    // if (empty($time_zone)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Time Zone is mandatory!";
+    // }
+    // if (empty($entry_time)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Entry Time is mandatory!";
+    // }
+    // if (empty($out_time)) {
+    //   $error_message[] = "<i class='fa-solid fa-check'></i>Out Time is mandatory!";
+    // }
 
     if (!empty($error_message)) {
       $_SESSION['validation'] = implode("<br>", $error_message); // ubah array menjadi string
     } else {
-      $result = mysqli_query($connect, "INSERT INTO presence_location(name_location, address_location, 
-      type_location, latitude, longitude, radius, time_zone, entry_time, out_time) VALUES 
-      ('$name_location', '$address_location', '$type_location', '$latitude', '$longitude','$radius',
-      '$time_zone','$entry_time','$out_time')");
+      $employees = mysqli_query($connect, "INSERT INTO employee(employee_id_number, name, gender, 
+      address, handphone, position, presence_location, photo) VALUES 
+      ('$employee_id_number', '$name', '$gender', '$address', '$handphone', '$position','$presence_location',
+      '$photo')");
+      $employee_id = mysqli_insert_id($connect);
+
+      $users = mysqli_query($connect, "INSERT INTO users(employee_id, username, password, 
+      status, role) VALUES 
+      ('$employee_id', '$username', '$password', '$status', '$role')");
 
       $_SESSION['succeed'] = 'Data saved successfully';
-      header("Location: presenceLocations.php");
+      header("Location: employees.php");
       exit;
     }
   }
@@ -76,7 +98,7 @@ if (isset($_POST['save'])) {
 <div class="page-body">
   <div class="container-xl">
 
-  <form action="<?= base_url('admin/data_employees/addEmployees.php') ?>" method="POST"> 
+  <form action="<?= base_url('admin/data_employees/addEmployees.php') ?>" method="POST" enctype="multipart/from-data"> 
 
     <div class="row">
 
@@ -100,7 +122,7 @@ if (isset($_POST['save'])) {
           
           ?>    
           
-          <div class="mb-3">
+              <div class="mb-3">
                 <label for="">Employee ID Number</label>
                 <input type="text" class="form-control" name="employee_id_number" value="<?= $new_employee_id_number ?>">
               </div>
@@ -117,12 +139,16 @@ if (isset($_POST['save'])) {
                   <option <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Male') { echo 'selected'; } ?> value="Male">Male</option>
                   <option <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Female') { echo 'selected'; } ?> value="Female">Female</option>
                 </select> 
-
               </div>
 
               <div class="mb-3">
                 <label for="">Address</label>
                 <input type="text" class="form-control" name="address" value="<?php if (isset($_POST['address'])) echo $_POST['address'] ?>">
+              </div>
+             
+              <div class="mb-3">
+                <label for="">Handphone</label>
+                <input type="text" class="form-control" name="handphone" value="<?php if (isset($_POST['handphone'])) echo $_POST['handphone'] ?>">
               </div>
 
               <div class="mb-3">
@@ -218,10 +244,10 @@ if (isset($_POST['save'])) {
           
             </div>
         </div>
-
-        </form>
       </div>
-    
+
+      </form>
+    </div>
   </div>
 </div>
 
