@@ -28,8 +28,8 @@ if (isset($_POST['save'])) {
   $status = htmlspecialchars($_POST['status']);
   $presence_location = htmlspecialchars($_POST['presence_location']);
 
-  if (isset($_FILE['photo'])) {
-    $file = $_FILE['photo'];
+  if (isset($_FILES['photo'])) {
+    $file = $_FILES['photo'];
     $name_file = $file['name'];
     $file_tmp = $file['tmp_name'];
     $file_size = $file['size'];
@@ -77,8 +77,9 @@ if (isset($_POST['save'])) {
     } else {
       $employees = mysqli_query($connect, "INSERT INTO employee(employee_id_number, name, gender, 
       address, handphone, position, presence_location, photo) VALUES 
-      ('$employee_id_number', '$name', '$gender', '$address', '$handphone', '$position','$presence_location',
-      '$photo')");
+      ('$employee_id_number', '$name', '$gender', '$address', '$handphone', '$position', '$presence_location',
+      '$name_file')");
+
       $employee_id = mysqli_insert_id($connect);
 
       $users = mysqli_query($connect, "INSERT INTO users(employee_id, username, password, 
@@ -158,8 +159,8 @@ if (isset($_POST['save'])) {
                   <?php 
                   $take_position = mysqli_query($connect, "SELECT * FROM position ORDER BY positions ASC");
 
-                  while ($positions = mysqli_fetch_assoc($take_position)) {
-                    $name_position = $positions['positions'];
+                  while ($position = mysqli_fetch_assoc($take_position)) {
+                    $name_position = $position['positions'];
 
                     if (isset($_POST['positions']) && $_POST['positions'] == $name_position){
                       echo '<option value="'. $name_position .'" selected = "selected">' . $name_position . '</option>';
