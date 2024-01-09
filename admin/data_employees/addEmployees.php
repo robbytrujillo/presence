@@ -21,7 +21,7 @@ if (isset($_POST['save'])) {
   $gender = htmlspecialchars($_POST['gender']);
   $address = htmlspecialchars($_POST['address']);
   $handphone = htmlspecialchars($_POST['handphone']);
-  $position = htmlspecialchars($_POST['position']);
+  $positions = htmlspecialchars($_POST['positions']);
   $username = htmlspecialchars($_POST['username']);
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $role = htmlspecialchars($_POST['role']);
@@ -33,7 +33,7 @@ if (isset($_POST['save'])) {
     $name_file = $file['name'];
     $file_tmp = $file['tmp_name'];
     $file_size = $file['size'];
-    $file_directory = "../../assets/img/photo_employee/" .$name_file;
+    $file_directory = "../../assets/img/photo_employee/" . $name_file;
     
     $take_extention = pathinfo($name_file, PATHINFO_EXTENSION);
     $extention_permitted = ["jpg","png","jpeg"];
@@ -76,8 +76,8 @@ if (isset($_POST['save'])) {
       $_SESSION['validation'] = implode("<br>", $error_message); // ubah array menjadi string
     } else {
       $employees = mysqli_query($connect, "INSERT INTO employee(employee_id_number, name, gender, 
-      address, handphone, position, presence_location, photo) VALUES 
-      ('$employee_id_number', '$name', '$gender', '$address', '$handphone', '$position', '$presence_location',
+      address, handphone, positions, presence_location, photo) VALUES 
+      ('$employee_id_number', '$name', '$gender', '$address', '$handphone', '$positions', '$presence_location',
       '$name_file')");
 
       $employee_id = mysqli_insert_id($connect);

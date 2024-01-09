@@ -31,7 +31,7 @@ $result = mysqli_query($connect, "SELECT users.employee_id, users.username,
       <th>Employee ID Number</th>
       <th>Name</th>
       <th>Username</th>
-      <th>Position</th>
+      <th>Positions</th>
       <th>Role</th>
       <th>Action</th>
     </tr>
@@ -47,7 +47,7 @@ $result = mysqli_query($connect, "SELECT users.employee_id, users.username,
             <td><?= $employees['employee_id_number'] ?></td>
             <td><?= $employees['name'] ?></td>
             <td><?= $employees['username'] ?></td>
-            <td><?= $employees['position'] ?></td>
+            <td><?= $employees['positions'] ?></td>
             <td><?= $employees['role'] ?></td>
             <td class="text-center">
               <a href="<?= base_url('admin/data_employees/detailEmployees.php?id=' . $employees['id']) ?>" class="badge badge-pill bg-primary">Detail</a>
