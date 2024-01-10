@@ -28,20 +28,50 @@ if (isset($_POST['save'])) {
   $status = htmlspecialchars($_POST['status']);
   $presence_location = htmlspecialchars($_POST['presence_location']);
 
-  if (isset($_FILES['photo'])) {
+  if (isset($_POST['photo'])) {
     $file = $_FILES['photo'];
     $name_file = $file['name'];
     $file_tmp = $file['tmp_name'];
     $file_size = $file['size'];
-    $file_directory = "../../assets/img/photo_employee/" . $name_file;
+    $file_directory = '../../assets/img/photo_employee/' . $name_file;
+    // $file_directory = '../../assets\img\photo_employee' . $name_file;
     
-    $take_extention = pathinfo($name_file, PATHINFO_EXTENSION);
-    $extention_permitted = ["jpg","png","jpeg"];
+    $take_extension = pathinfo($name_file, PATHINFO_EXTENSION);
+    $extension_permitted = ["jpg","png","jpeg"];
     $max_file_size = 10 * 1024 * 1024;
 
+    //if(in_array($take_extension,$extension_permitted)) {
     move_uploaded_file($file_tmp, $file_directory);
+      
+    }
 
+  //   /* The above code is checking if the file extension is permitted and if the file size is within
+  // the maximum allowed size. If both conditions are met, it will move the uploaded file to a
+  // specified directory and save the file path in a database. If the file upload is successful,
+  // it will display a success message. If not, it will display an error message. However, the
+  // code is currently commented out, so it is not being executed. */
+  // if (in_array(strtolower($take_extension), $extension_permitted) && $file_size <= $max_file_size) {
+  //     if (move_uploaded_file($file_tmp, $file_directory)) {
+  //         // Simpan path foto ke dalam database
+  //         $photo_path_to_save_in_db = "assets/img/photo_employee/" . $name_file;
+          
+  //         // Lakukan query SQL untuk menyimpan $photo_path_to_save_in_db ke dalam database
+  //         // Misalnya: 
+  //         // $sql = "INSERT INTO nama_tabel (photo_path_column) VALUES ('$photo_path_to_save_in_db')";
+  //         // Eksekusi query SQL dengan menggunakan metode yang sesuai (PDO, mysqli, dll.)
+          
+  //         // Jangan lupa untuk menjalankan query SQL ke database
+          
+  //         // Jika query berhasil dijalankan, beri pesan berhasil
+  //         // Jika tidak, beri pesan gagal
+  //     } else {
+  //         // Pesan jika gagal mengunggah file
+  //     }
+  // } else {
+      // Pesan jika ekstensi file tidak diperbolehkan atau ukuran file melebihi batas
   }
+
+  //}
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($name)) {
@@ -91,7 +121,7 @@ if (isset($_POST['save'])) {
       exit;
     }
   }
-}
+
 
 // $result = mysqli_query($connect, "SELECT * FROM presence_location ORDER BY id DESC");
 ?>
