@@ -100,6 +100,9 @@ if (isset($_POST['save'])) {
     if (empty($presence_location)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Presence Location is mandatory!";
     }
+    if (empty($password)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Password is mandatory!";
+    }
 
     if (!empty($error_message)) {
       $_SESSION['validation'] = implode("<br>", $error_message); // ubah array menjadi string
