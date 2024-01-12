@@ -79,27 +79,27 @@ if (isset($_POST['save'])) {
     if (empty($gender)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Gender is mandatory!";
     }
-    // if (empty($type_location)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Type loc. is mandatory!";
-    // }
-    // if (empty($latitude)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Latitude is mandatory!";
-    // }
-    // if (empty($longitude)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Longitude is mandatory!";
-    // }
-    // if (empty($radius)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Radius is mandatory!";
-    // }
-    // if (empty($time_zone)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Time Zone is mandatory!";
-    // }
-    // if (empty($entry_time)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Entry Time is mandatory!";
-    // }
-    // if (empty($out_time)) {
-    //   $error_message[] = "<i class='fa-solid fa-check'></i>Out Time is mandatory!";
-    // }
+    if (empty($address)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Address loc. is mandatory!";
+    }
+    if (empty($handphone)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Handphone is mandatory!";
+    }
+    if (empty($position)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Longitude is mandatory!";
+    }
+    if (empty($username)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>username is mandatory!";
+    }
+    if (empty($role)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Role is mandatory!";
+    }
+    if (empty($status)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Status is mandatory!";
+    }
+    if (empty($presence_location)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Presence Location is mandatory!";
+    }
 
     if (!empty($error_message)) {
       $_SESSION['validation'] = implode("<br>", $error_message); // ubah array menjadi string
