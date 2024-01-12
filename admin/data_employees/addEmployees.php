@@ -103,6 +103,9 @@ if (isset($_POST['save'])) {
     if (empty($password)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Password is mandatory!";
     }
+    if ($_POST['password'] != $_POST['confirm_password']) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Password is mandatory!";
+    }
 
     if (!empty($error_message)) {
       $_SESSION['validation'] = implode("<br>", $error_message); // ubah array menjadi string
