@@ -16,7 +16,21 @@ include ('../layout/header.php');
 require_once('../../config.php');
 
 if (isset($_POST['save'])) {
-  $employee_id_number = htmlspecialchars($_POST['employee_id_number']);
+
+  $take_employee_id_number = mysqli_query($connect, "SELECT employee_id_number FROM employee ORDER BY employee_id_number DESC LIMIT 1");
+
+  if (mysqli_num_rows($take_employee_id_number) > 0) {
+    $row = mysqli_fetch_assoc($take_employee_id_number);
+    $employee_id_number_db = $row['employee_id_number'];
+    $employee_id_number_db = explode("-", $employee_id_number_db);
+    $new_number = (int)$employee_id_number_db[1] + 1;
+    $new_employee_id_number = "EMP-" . str_pad($new_number, 4, 0, STR_PAD_LEFT);
+  } else {
+    $new_employee_id_number = "EMP-0001";
+  }
+
+  // $employee_id_number = htmlspecialchars($_POST['employee_id_number']);
+  $employee_id_number = $new_employee_id_number;
   $name = htmlspecialchars($_POST['name']);
   $gender = htmlspecialchars($_POST['gender']);
   $address = htmlspecialchars($_POST['address']);
@@ -124,24 +138,24 @@ if (isset($_POST['save'])) {
           
           <!--automation add Employee ID Number  -->
           <?php 
-          $take_employee_id_number = mysqli_query($connect, "SELECT employee_id_number FROM employee ORDER BY employee_id_number DESC LIMIT 1");
+          // $take_employee_id_number = mysqli_query($connect, "SELECT employee_id_number FROM employee ORDER BY employee_id_number DESC LIMIT 1");
 
-          if (mysqli_num_rows($take_employee_id_number) > 0) {
-            $row = mysqli_fetch_assoc($take_employee_id_number);
-            $employee_id_number_db = $row['employee_id_number'];
-            $employee_id_number_db = explode("-", $employee_id_number_db);
-            $new_number = (int)$employee_id_number_db[1] + 1;
-            $new_employee_id_number = "EMP-" . str_pad($new_number, 4, 0, STR_PAD_LEFT);
-          } else {
-            $new_employee_id_number = "EMP-0001";
-          }
+          // if (mysqli_num_rows($take_employee_id_number) > 0) {
+          //   $row = mysqli_fetch_assoc($take_employee_id_number);
+          //   $employee_id_number_db = $row['employee_id_number'];
+          //   $employee_id_number_db = explode("-", $employee_id_number_db);
+          //   $new_number = (int)$employee_id_number_db[1] + 1;
+          //   $new_employee_id_number = "EMP-" . str_pad($new_number, 4, 0, STR_PAD_LEFT);
+          // } else {
+          //   $new_employee_id_number = "EMP-0001";
+          // }
           
           ?>    
           
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="">Employee ID Number</label>
-                <input type="text" class="form-control" name="employee_id_number" value="<?= $new_employee_id_number ?>">
-              </div>
+                <input type="text" class="form-control" name="employee_id_number" value="<?= $new_employee_id_number ?>" readonly>
+              </div> -->
 
               <div class="mb-3">
                 <label for="">Name</label>
