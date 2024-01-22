@@ -42,33 +42,33 @@ if (isset($_POST['save'])) {
   $status = htmlspecialchars($_POST['status']);
   $presence_location = htmlspecialchars($_POST['presence_location']);
 
-  $rand = rand();
-  $ekstensi =  array('png','jpg','jpeg','gif');
-  $filename = $_FILES['photo']['name'];
-  $ukuran = $_FILES['[photo']['size'];
-  $ext = pathinfo($filename, PATHINFO_EXTENSION);
-  if($ukuran < 1044070){		
-		$xx = $rand.'_'.$filename;
-		move_uploaded_file($_FILES['photo']['tmp_name'], '../assets/img/photo_employee/'.$rand.'_'.$filename);
+  // $rand = rand();
+  // $ekstensi =  array('png','jpg','jpeg','gif');
+  // $filename = $_FILES['photo']['name'];
+  // $ukuran = $_FILES['[photo']['size'];
+  // $ext = pathinfo($filename, PATHINFO_EXTENSION);
+  // if($ukuran < 1044070){		
+	// 	$xx = $rand.'_'.$filename;
+	// 	move_uploaded_file($_FILES['photo']['tmp_name'], '../assets/img/photo_employee/'.$rand.'_'.$filename);
 
 
-  // if (isset($_FILES['photo'])) {
-  //   $file = $_FILES['photo'];
-  //   $name_file = $file['name'];
-  //   $file_tmp = $file['tmp_name'];
-  //   $file_size = $file['size'];
-  //   $file_directory = '../../assets/img/photo_employee/' . $name_file;
+  if (isset($_FILES['photo'])) {
+    $file = $_FILES['photo'];
+    $name_file = $file['name'];
+    $file_tmp = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_directory = '../../assets/img/photo_employee/' . $name_file;
     
-    // $take_extension = pathinfo($name_file, PATHINFO_EXTENSION);
-    // $extension_permitted = ["jpg","png","jpeg"];
-    // $max_file_size = 10 * 1024 * 1024;
+    $take_extension = pathinfo($name_file, PATHINFO_EXTENSION);
+    $extension_permitted = ["jpg","png","jpeg"];
+    $max_file_size = 10 * 1024 * 1024;
 
     
-    // move_uploaded_file($file_tmp, $file_directory);
+    move_uploaded_file($file_tmp, $file_directory);
       
     }
   
-    }
+    
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -99,12 +99,12 @@ if (isset($_POST['save'])) {
     if (empty($presence_location)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Presence Location is mandatory!";
     }
-    if (in_array(strtolower($ext), $ekstensi)) {
+    if (!in_array(strtolower($take_extension), $extension_permitted)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Only JPG, JPEG, and PNG files are allowed";
     }
     
-    if (in_array(strtolower($ext), $ekstensi)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Only JPG, JPEG, and PNG files are allowed";
+    if ($file_size > $max_file_size) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>file size exceeds 10 MB";
     }
 
 
@@ -135,7 +135,7 @@ if (isset($_POST['save'])) {
     }
   }
 
-
+}
 // $result = mysqli_query($connect, "SELECT * FROM presence_location ORDER BY id DESC");
 ?>
 
