@@ -100,8 +100,8 @@ if (isset($_POST['save'])) {
     if (empty($presence_location)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Presence Location is mandatory!";
     }
-    if (in_array(strtolower($ekstensi), $ekstensi)) {
-      $error_message[] = "<i class='fa-solid fa-check'></i>Presence Location is mandatory!";
+    if (in_array(strtolower($ext), $ekstensi)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Only JPG, JPEG, and PNG files are allowed";
     }
     if (empty($password)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Password is mandatory!";
