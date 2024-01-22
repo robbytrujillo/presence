@@ -52,19 +52,18 @@ if (isset($_POST['save'])) {
 		move_uploaded_file($_FILES['photo']['tmp_name'], '../assets/img/photo_employee/'.$rand.'_'.$filename);
 
 
-  // if (isset($_POST['photo'])) {
+  // if (isset($_FILES['photo'])) {
   //   $file = $_FILES['photo'];
   //   $name_file = $file['name'];
   //   $file_tmp = $file['tmp_name'];
   //   $file_size = $file['size'];
   //   $file_directory = '../../assets/img/photo_employee/' . $name_file;
-    // $file_directory = '../../assets\img\photo_employee' . $name_file;
     
     // $take_extension = pathinfo($name_file, PATHINFO_EXTENSION);
     // $extension_permitted = ["jpg","png","jpeg"];
     // $max_file_size = 10 * 1024 * 1024;
 
-    //if(in_array($take_extension,$extension_permitted)) {
+    
     // move_uploaded_file($file_tmp, $file_directory);
       
     }
@@ -103,6 +102,12 @@ if (isset($_POST['save'])) {
     if (in_array(strtolower($ext), $ekstensi)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Only JPG, JPEG, and PNG files are allowed";
     }
+    
+    if (in_array(strtolower($ext), $ekstensi)) {
+      $error_message[] = "<i class='fa-solid fa-check'></i>Only JPG, JPEG, and PNG files are allowed";
+    }
+
+
     if (empty($password)) {
       $error_message[] = "<i class='fa-solid fa-check'></i>Password is mandatory!";
     }
